@@ -1,0 +1,49 @@
+<?php>
+
+
+include 'Config.php'
+
+class Conexion extends Config{
+
+	private $conexionPostgreSQL;
+	private $stringConexion;
+
+	function __construct(){
+
+		$this->stringConexion="host=".parent::getServidor()."port::getPuerto()".
+		"dbname=".parent::getBasedatos()."user=".parent::getUsuario()."password=".
+		parent::getContraseña();
+
+		if(!($this-> conexionPostgreSQL=pg_connect($this-> connection_string))){
+			echo "Error al conectarse";
+			exit();
+		}
+	}
+
+	function Conexion(){
+		return $this-> conexionPostgreSQL;
+	}
+	
+	function ejecutarComando($stringConsulta){
+		$resultado=pg_query($this-> conexionPostgreSQL,$stringConsulta);
+		return $resultado; 
+	}
+
+	function ejecutarProcedimiento($stringConsulta){
+		$resultado=pg_query($this-> conexionPostgreSQL,$stringConsulta);
+		return $resultado;
+	}
+
+	function cerrarConexion(){
+		pg_close($this->conexionPostgreSQL);
+	}
+
+	function begintransaction(){
+		$this->ejecutarComando('start transaction');
+	}
+
+	function commit(){
+		$this-> ejecutarComando('commit transaction');
+	}
+}
+?>

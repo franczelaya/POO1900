@@ -1,0 +1,37 @@
+<?php
+
+abstract class Config{
+	protected $servidor = "localhost";
+	protected $base_datos ="matricula";
+	protected $usuario = "matricula_login";
+	protected $contraseña = "claveacceso";
+	protected $puerto= 5432;
+	protected $esquema="public";
+
+
+	protected function getServidor(){
+		return $this-> servidor;
+	}
+
+	protected function getBaseDatos(){
+		return $this-> base_datos;
+	}
+
+	protected function getUsuario(){
+		return $this-> usuario;
+	}
+	
+	protected function getContraseña(){
+		return $this-> contraseña;
+	}
+
+	protected function getPuerto(){
+		return $this-> puerto;
+	}
+
+	protected function getEsquema(){
+		return $this-> esquema;
+	}
+}
+
+?>
